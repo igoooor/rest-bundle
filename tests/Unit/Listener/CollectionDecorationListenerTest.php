@@ -2,6 +2,7 @@
 namespace Ibrows\RestBundle\Tests\Unit\Listener;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\RestBundle\Controller\Annotations\View as FOSView;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Hateoas\Representation\CollectionRepresentation;
 use Ibrows\RestBundle\Annotation\View;
@@ -72,6 +73,8 @@ class CollectionDecorationListenerTest extends PHPUnit_Framework_TestCase
                 [],
                 [
                     'paramFetcher' => $this->paramFetcher,
+                    '_template' => $this->getMockBuilder(View::class)
+                        ->disableOriginalConstructor()->getMock()
                 ]
             ),
             HttpKernelInterface::MASTER_REQUEST,

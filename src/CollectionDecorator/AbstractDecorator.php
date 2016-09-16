@@ -2,6 +2,7 @@
 namespace Ibrows\RestBundle\CollectionDecorator;
 
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use Ibrows\RestBundle\Annotation\View;
 use Ibrows\RestBundle\Model\ApiListableInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
@@ -21,7 +22,7 @@ abstract class AbstractDecorator implements DecoratorInterface
     {
         $routeParameters = [];
         $requiredParameters = $this->getInternalParameters();
-        if ($params->has('_template')) {
+        if ($params->has('_template') && $params->get('_template') instanceof View) {
             $requiredParameters = array_merge($params->get('_template')->getRouteParams());
         }
         foreach ($requiredParameters as $routeParamName) {

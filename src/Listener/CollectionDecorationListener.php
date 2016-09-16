@@ -23,7 +23,7 @@ class CollectionDecorationListener
 
     /**
      * AbstractCollectionDecorationListener constructor.
-     * @param array                $configuration
+     * @param array $configuration
      * @param TransformerInterface $resourceTransformer
      */
     public function __construct(
@@ -39,11 +39,17 @@ class CollectionDecorationListener
      */
     public function onKernelView(GetResponseForControllerResultEvent $event)
     {
-        if ($this->validateCollection($event->getControllerResult())) {
-            $this->wrapCollection($event);
-            $this->decorateView($event);
-            $this->addListGroup($event);
+        if (!$this->validateCollection($event->getControllerResult())) {
+            return;
         }
+
+        if (!$event->getRequest()->attributes->get('_template') instanceof View) {
+            return;
+        }
+
+        $this->wrapCollection($event);
+        $this->decorateView($event);
+        $this->addListGroup($event);
     }
 
     /**
@@ -52,7 +58,8 @@ class CollectionDecorationListener
      */
     protected function validateCollection($data)
     {
-        if ((
+        if (
+            (
                 !$data instanceof Collection &&
                 !is_array($data)
             )
@@ -81,7 +88,7 @@ class CollectionDecorationListener
         }
 
         $element = reset($data);
-        $name  = null;
+        $name = null;
 
         if ($element) {
             $name = $this->resourceTransformer->getResourcePluralName($element);
@@ -122,7 +129,7 @@ class CollectionDecorationListener
         /** @var View $view */
         $view = $event->getRequest()->attributes->get('_template');
 
-        if ($view &&
+        if ($view instanceof View &&
             count($view->getSerializerGroups()) > 0
         ) {
             $view->setSerializerGroups(
