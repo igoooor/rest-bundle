@@ -8,8 +8,8 @@
     <services>
         <service id="ibrows_rest.param_converter.patch" class="%ibrows_rest.param_converter.patch.class%">
             <argument>%ibrows_rest.config.param_converter.patch%</argument>
-            <argument type="service" id="ibrows_rest.patch.patch_converter" />
-            <argument type="service" id="ibrows_rest.patch.executioner.jms" />
+            <argument type="service" id="ibrows_json_patch.patch_converter" />
+            <argument type="service" id="ibrows_json_patch.executioner.jms" />
             <call method="setValidator">
                 <argument type="service" id="validator"/>
             </call>

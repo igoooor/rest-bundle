@@ -1,11 +1,11 @@
 <?php
 namespace Ibrows\RestBundle\ParamConverter;
 
-use Ibrows\RestBundle\Patch\Exception\InvalidPathException;
-use Ibrows\RestBundle\Patch\Exception\OperationInvalidException;
-use Ibrows\RestBundle\Patch\ExecutionerInterface;
-use Ibrows\RestBundle\Patch\OperationInterface;
-use Ibrows\RestBundle\Patch\PatchConverterInterface;
+use Ibrows\JsonPatch\Exception\InvalidPathException;
+use Ibrows\JsonPatch\Exception\OperationInvalidException;
+use Ibrows\JsonPatch\ExecutionerInterface;
+use Ibrows\JsonPatch\OperationInterface;
+use Ibrows\JsonPatch\PatchConverterInterface;
 use JMS\Serializer\DeserializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;

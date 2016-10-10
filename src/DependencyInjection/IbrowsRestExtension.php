@@ -34,7 +34,6 @@ class IbrowsRestExtension extends Extension
         $loader->load('debug_converter.xml');
         $loader->load('transformer.xml');
         $loader->load('utils.xml');
-        $loader->load('patch.xml');
         $loader->load('hateoas_configuration_extension.xml');
 
         // ParamConverters are loaded dynamically according to the configuration.

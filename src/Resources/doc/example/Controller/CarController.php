@@ -186,10 +186,10 @@ class CarController implements ClassResourceInterface
      * @ApiDoc(
      *     section="Car",
      *     description="Edit a car",
-     *     input="Ibrows\RestBundle\Ibrows\RestBundle\Patch\Operation",
+     *     input="Ibrows\RestBundle\Ibrows\JsonPatch\Operation",
      * )
      *
-     * @FOSRest\Ibrows\RestBundle\Patch(path="/{car}")
+     * @FOSRest\Ibrows\JsonPatch(path="/{car}")
      *
      * @param Car $car
      * @ParamConverter(

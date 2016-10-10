@@ -2,8 +2,8 @@
 namespace Ibrows\RestBundle\Tests\Integration;
 
 use DateTime;
-use Ibrows\RestBundle\Patch\ExecutionerInterface;
-use Ibrows\RestBundle\Patch\PatchConverterInterface;
+use Ibrows\JsonPatch\ExecutionerInterface;
+use Ibrows\JsonPatch\PatchConverterInterface;
 use Ibrows\RestBundle\Tests\Integration\Entity\Article;
 use Ibrows\RestBundle\Tests\Integration\Entity\Comment;
 use JMS\Serializer\DeserializationContext;
@@ -15,7 +15,7 @@ class JMSPatchConvertTest extends WebTestCase
      */
     private function getPatchConverter()
     {
-        return $this->getContainer()->get('ibrows_rest.patch.patch_converter');
+        return $this->getContainer()->get('ibrows_json_patch.patch_converter');
     }
 
     /**
@@ -23,7 +23,7 @@ class JMSPatchConvertTest extends WebTestCase
      */
     private function getExecutioner()
     {
-        return $this->getContainer()->get('ibrows_rest.patch.executioner.jms');
+        return $this->getContainer()->get('ibrows_json_patch.executioner.jms');
     }
 
     public function testJMSValue()
@@ -48,7 +48,7 @@ class JMSPatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\ResolvePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\ResolvePathException
      * @expectedExceptionMessage Could not resolve path "invalid" on current address.
      */
     public function testInvalidJMSValue()
@@ -83,7 +83,7 @@ class JMSPatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\ResolvePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\ResolvePathException
      * @expectedExceptionMessage Could not resolve path "subject" on current address.
      */
     public function testJMSGroups()
@@ -118,7 +118,7 @@ class JMSPatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\ResolvePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\ResolvePathException
      * @expectedExceptionMessage Could not resolve path "hidden" on current address.
      */
     public function testReadOnly()

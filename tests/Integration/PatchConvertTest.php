@@ -1,10 +1,10 @@
 <?php
 namespace Ibrows\RestBundle\Tests\Integration;
 
-use Ibrows\RestBundle\Patch\Address\ObjectAddress;
-use Ibrows\RestBundle\Patch\ExecutionerInterface;
-use Ibrows\RestBundle\Patch\OperationInterface;
-use Ibrows\RestBundle\Patch\PatchConverterInterface;
+use Ibrows\JsonPatch\Address\ObjectAddress;
+use Ibrows\JsonPatch\ExecutionerInterface;
+use Ibrows\JsonPatch\OperationInterface;
+use Ibrows\JsonPatch\PatchConverterInterface;
 use Ibrows\RestBundle\Tests\Integration\Entity\Article;
 use Ibrows\RestBundle\Tests\Integration\Entity\Comment;
 
@@ -15,7 +15,7 @@ class PatchConvertTest extends WebTestCase
      */
     private function getPatchConverter()
     {
-        return $this->getContainer()->get('ibrows_rest.patch.patch_converter');
+        return $this->getContainer()->get('ibrows_json_patch.patch_converter');
     }
 
     /**
@@ -23,7 +23,7 @@ class PatchConvertTest extends WebTestCase
      */
     private function getExecutioner()
     {
-        return $this->getContainer()->get('ibrows_rest.patch.executioner');
+        return $this->getContainer()->get('ibrows_json_patch.executioner');
     }
 
     public function testPatchList()
@@ -157,7 +157,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\ResolvePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\ResolvePathException
      * @expectedExceptionMessage Could not resolve path "path" on current address.
      */
     public function testMissingPathHashSet()
@@ -183,7 +183,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\ResolvePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\ResolvePathException
      * @expectedExceptionMessage Could not resolve path "7" on current address.
      */
     public function testReplaceMissingPathList()
@@ -204,7 +204,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\ResolvePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\ResolvePathException
      * @expectedExceptionMessage Could not resolve path "77" on current address.
      */
     public function testMissingPathList()
@@ -225,7 +225,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\OperationInvalidException
+     * @expectedException \Ibrows\JsonPatch\Exception\OperationInvalidException
      * @expectedExceptionMessage The property "path" must be provided for every operation.
      */
     public function testMissingPath()
@@ -245,7 +245,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\ResolvePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\ResolvePathException
      * @expectedExceptionMessage Could not resolve path "missing" on current address.
      */
     public function testReplaceMissingPathHashSet()
@@ -268,7 +268,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\OverridePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\OverridePathException
      * @expectedExceptionMessage Could not add on path "override" because it already exists.
      */
     public function testAddExistingPathHashSet()
@@ -291,7 +291,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\ResolvePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\ResolvePathException
      * @expectedExceptionMessage Could not resolve path "missing" on current address.
      */
     public function testRemoveMissingPathHashSet()
@@ -313,7 +313,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\ResolvePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\ResolvePathException
      * @expectedExceptionMessage Could not resolve path "3" on current address.
      */
     public function testRemoveMissingPathList()
@@ -336,7 +336,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\OperationInvalidException
+     * @expectedException \Ibrows\JsonPatch\Exception\OperationInvalidException
      * @expectedExceptionMessage Operation test failed. Expected: "something", Actual: "something else"
      */
     public function testFailingTestOperation()
@@ -360,7 +360,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\OperationInvalidException
+     * @expectedException \Ibrows\JsonPatch\Exception\OperationInvalidException
      * @expectedExceptionMessage Couldn't find an applier for the operation "something".
      */
     public function testMissingOperation()
@@ -448,7 +448,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\ResolvePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\ResolvePathException
      * @expectedExceptionMessage Could not resolve path "some" on current address.
      */
     public function testInvalidPathDirectlyOnObject()
@@ -470,7 +470,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\ResolvePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\ResolvePathException
      * @expectedExceptionMessage Could not resolve path "missing" on current address.
      */
     public function testInvalidPathOnObject()
@@ -492,7 +492,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\OperationInvalidException
+     * @expectedException \Ibrows\JsonPatch\Exception\OperationInvalidException
      */
     public function testInvalidPatchBody()
     {
@@ -509,7 +509,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\OverridePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\OverridePathException
      * @expectedExceptionMessage Could not add on path "subject" because it already exists.
      */
     public function testNotNullAddOnObject()
@@ -534,7 +534,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\ResolvePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\ResolvePathException
      * @expectedExceptionMessage Could not resolve path "missing" on current address.
      */
     public function testInvalidAddOnObject()
@@ -556,7 +556,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\ResolvePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\ResolvePathException
      * @expectedExceptionMessage Could not resolve path "missing" on current address.
      */
     public function testInvalidRemoveOnObject()
@@ -577,7 +577,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\PropertyNullPathException
+     * @expectedException \Ibrows\JsonPatch\Exception\PropertyNullPathException
      * @expectedExceptionMessage Could not change on path "subject" because value is null ( exists not ).
      */
     public function testInvalidNullRemoveOnObject()
@@ -600,7 +600,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\PropertyNullPathException
+     * @expectedException \Ibrows\JsonPatch\Exception\PropertyNullPathException
      * @expectedExceptionMessage Could not change on path "subject" because value is null ( exists not ).
      */
     public function testInvalidNullReplaceOnObject()
@@ -624,7 +624,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\OverridePathException
+     * @expectedException \Ibrows\JsonPatch\Exception\OverridePathException
      * @expectedExceptionMessage Could not add on path "subject" because it already exists.
      */
     public function testOverrideObject()
@@ -665,7 +665,7 @@ class PatchConvertTest extends WebTestCase
 
         $comment = new Comment();
 
-        $value = $this->getContainer()->get('ibrows_rest.patch.address_lookup')->lookup(
+        $value = $this->getContainer()->get('ibrows_json_patch.address_lookup')->lookup(
             $operation->pathPointer(),
             $comment
         );
@@ -676,7 +676,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\OperationInvalidException
+     * @expectedException \Ibrows\JsonPatch\Exception\OperationInvalidException
      * @expectedExceptionMessage The property "from" must be provided for the move operation.
      */
     public function testMoveWithoutFrom()
@@ -697,7 +697,7 @@ class PatchConvertTest extends WebTestCase
     }
 
     /**
-     * @expectedException \Ibrows\RestBundle\Patch\Exception\OperationInvalidException
+     * @expectedException \Ibrows\JsonPatch\Exception\OperationInvalidException
      * @expectedExceptionMessage The property "from" must be provided for the copy operation.
      */
     public function testCopyWithoutFrom()

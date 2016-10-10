@@ -41,6 +41,7 @@ class AppKernel extends Kernel
             new \FOS\RestBundle\FOSRestBundle(),
             new \JMS\SerializerBundle\JMSSerializerBundle(),
             new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
+            new \Ibrows\JsonPatch\IbrowsJsonPatchBundle(),
             new \Ibrows\RestBundle\IbrowsRestBundle(),
         ];
     }

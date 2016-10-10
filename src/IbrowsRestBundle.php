@@ -1,5 +1,4 @@
 <?php
-
 namespace Ibrows\RestBundle;
 
 use Ibrows\RestBundle\DependencyInjection\Compiler\CollectionDecorationListenerCompilerPass;
@@ -7,8 +6,6 @@ use Ibrows\RestBundle\DependencyInjection\Compiler\DebugResponseListenerCompiler
 use Ibrows\RestBundle\DependencyInjection\Compiler\OverrideExceptionHandlerCompilerPass;
 use Ibrows\RestBundle\DependencyInjection\Compiler\OverrideRequestConverterCompilerPass;
 use Ibrows\RestBundle\DependencyInjection\Compiler\ParamConvertersCompilerPass;
-use Ibrows\RestBundle\DependencyInjection\Compiler\PatchAddressResolverCompilerPass;
-use Ibrows\RestBundle\DependencyInjection\Compiler\PatchOperationAppliersCompilerPass;
 use Ibrows\RestBundle\DependencyInjection\Compiler\ResourceTransformerCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -25,8 +22,6 @@ class IbrowsRestBundle extends Bundle
         $container->addCompilerPass(new DebugResponseListenerCompilerPass());
         $container->addCompilerPass(new ResourceTransformerCompilerPass());
         $container->addCompilerPass(new CollectionDecorationListenerCompilerPass());
-        $container->addCompilerPass(new PatchAddressResolverCompilerPass());
-        $container->addCompilerPass(new PatchOperationAppliersCompilerPass());
         $container->addCompilerPass(new OverrideExceptionHandlerCompilerPass());
     }
 }
