@@ -46,7 +46,7 @@ class RequestBodyParamConverter implements ParamConverterInterface
 
         $validationErrors = $request->attributes->get($this->validationErrorsArgument);
 
-        if ($this->failOnValidationError &&
+        if ($this->checkFailureOnValidationError($configuration) &&
             count($validationErrors) > 0
         ) {
             throw new BadRequestConstraintException($validationErrors);
@@ -61,5 +61,18 @@ class RequestBodyParamConverter implements ParamConverterInterface
     public function supports(ParamConverter $configuration)
     {
         return $this->decoratedRequestBodyParamConverter->supports($configuration);
+    }
+
+    /**
+     * @param ParamConverter $configuration
+     * @return bool
+     */
+    protected function checkFailureOnValidationError(ParamConverter $configuration)
+    {
+        if (isset($configuration->getOptions()['fail_on_validation_error'])) {
+            return $configuration->getOptions()['fail_on_validation_error'];
+        }
+
+        return $this->failOnValidationError;
     }
 }
